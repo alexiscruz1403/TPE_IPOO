@@ -8,8 +8,8 @@ class Viaje{
     private $codigo; //Int
     private $cantidadMaximaPasajeros; //Int
     private $destino; //String
-    private $objResponsableViaje; //Obejo Clase ResponsableViaje
-    private $objPasajero; //Arreglo de Objeto Clase Pasajero
+    private $objResponsableViaje; //Obejo ResponsableViaje
+    private $objPasajero; //Arreglo de Objeto Pasajero
 
     //Constructor
     public function __construct($unCodigo,$unaCantidadMaxima,$unDestino,$unResponsable){
@@ -62,6 +62,18 @@ class Viaje{
         return $this->objResponsableViaje;
     }
 
+    /**
+     * Retorna una cadena con toda la informacion de la instancia
+     * @return string
+     */
+    public function __toString(){
+        return "Codigo: ".$this->getCodigo()."\n".
+                "Destino: ".$this->getDestino()."\n".
+                "Cantidad maxima de pasajeros: ".$this->getCantidadMaximaPasajeros()."\n".
+                "Cantidad actual de pasajeros: ".$this->cantidadPasajeros()."\n".
+                "Responsable de viaje: ".$this->getResponsableViaje()->getNombre()." ".$this->getResponsableViaje()->getApellido()."\n";
+    }
+
     //Modificadores
 
     /**
@@ -108,7 +120,7 @@ class Viaje{
     //Propios
 
     /**
-     * Retorna la cantidad de pasajeros en el arreglo de Pasajero en el atributo objPasajero
+     * Retorna la cantidad de pasajeros en el arreglo del atributo objPasajero
      * @return int
      */
     public function cantidadPasajeros(){
@@ -116,7 +128,7 @@ class Viaje{
     }
 
     /**
-     * Retorna el pasajero en la posicion indicada por parametro dentro del arreglo de Pasajero en el atributo objPasajero
+     * Retorna el pasajero en la posicion indicada por parametro dentro del arreglo del atributo objPasajero
      * @param int $posicion
      * @return Pasajero
      */
@@ -125,13 +137,13 @@ class Viaje{
     }
 
     /**
-     * Verifica si el pasajero ingresado por parametro se encuentra en el arreglo de Pasajero en el atributo objPasajero
+     * Verifica si el pasajero ingresado por parametro se encuentra en el arreglo del atributo objPasajero
      * Compara los numeros de documento para determinar si son iguales o no
      * Devuelve la posicion dentro del arreglo si se encuentra dentro o -1 si no esta cargado en el arreglo
      * @param int $numeroDocumento
      * @return int
      */
-    public function darPosicionPasajero($numeroDocumento){
+    public function darPosicionPasajeroConDni($numeroDocumento){
         $encontrado=false;
         $posicion=-1;
         if($this->cantidadPasajeros()!=0){
@@ -156,8 +168,10 @@ class Viaje{
      */
     public function agregarPasajero($unPasajero){
         $agregado=false;
-        if($this->darPosicionPasajero($unPasajero->getNumeroDocumento)==-1){
-            $this->getPasajeros()[$this->cantidadPasajeros()]=$unPasajero;
+        if($this->darPosicionPasajeroConDni($unPasajero->getNumeroDocumento())==-1){
+            $arreglo=$this->getPasajeros();
+            array_push($arreglo,$unPasajero);
+            $this->setPasajeros($arreglo);
             $agregado=true;
         }
         return $agregado;
@@ -166,18 +180,20 @@ class Viaje{
     /**
      * Elimina el pasajero en la posicion indicada por parametro
      * Antes de eliminarlo verifica si se encuentra o no cargado en el arreglo
-     * Devuelve true si finalmente pudo ser cargado o false si no se pudo agregar
+     * Devuelve true si finalmente pudo ser eliminado o false si no se pudo eliminar
      * @param int $numeroDocumento
      * @return boolean
      */
     public function elimiarPasajero($numeroDocumento){
         $eliminado=false;
-        $posicion=$this->darPosicionPasajero($numeroDocumento);
+        $posicion=$this->darPosicionPasajeroConDni($numeroDocumento);
         if($posicion!=-1){
+            $arreglo=$this->getPasajeros();
             for($i=$posicion;$i<$this->cantidadPasajeros()-1;$i++){
-                $this->getPasajeros()[$i]=$this->getPasajeros()[$i+1];
+                $arreglo[$i]=$this->darPasajeroEn($i+1);
             }
-            array_pop($this->getPasajeros());
+            array_pop($arreglo);
+            $this->setPasajeros($arreglo);
             $eliminado=true;
         }
         return $eliminado;

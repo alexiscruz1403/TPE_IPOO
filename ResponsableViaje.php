@@ -51,7 +51,7 @@ class ResponsableViaje{
     }
 
     /**
-     * Muestra la informacion completa del responsable de viaje
+     * Retorna una cadena con toda la informacion de la instancia
      * @return string
      */
     public function __toString(){
