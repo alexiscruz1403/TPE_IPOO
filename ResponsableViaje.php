@@ -50,6 +50,17 @@ class ResponsableViaje{
         return $this->numeroEmpleado;
     }
 
+    /**
+     * Muestra la informacion completa del responsable de viaje
+     * @return string
+     */
+    public function __toString(){
+        return "Nombre: ".$this->getNombre()."\n".
+                "Apellido: ".$this->getApellido()."\n".
+                "Numero Licencia: ".$this->getNumeroLicencia()."\n".
+                "Numero Empleado: ".$this->getNumeroEmpleado()."\n";
+    }
+
     //Modificadores
 
     /**

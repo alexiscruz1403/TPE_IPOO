@@ -50,6 +50,17 @@ Class Pasajero{
         return $this->telefono;
     }
 
+    /**
+     * Retorna una cadena con toda la informacion de la instancia
+     * @return string
+     */
+    public function __toString(){
+        return "Nombre: ".$this->getNombre()."\n".
+                "Apellido: ".$this->getApellido()."\n".
+                "Numero de documento: ".$this->getNumeroDocumento()."\n".
+                "Telefono: ".$this->getTelefono()."\n";
+    }
+
     //Modificadores
 
     /**

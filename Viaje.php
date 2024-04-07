@@ -8,13 +8,15 @@ class Viaje{
     private $codigo; //Int
     private $cantidadMaximaPasajeros; //Int
     private $destino; //String
-    private $objPasajero; //Arreglo de Pasajero
+    private $objResponsableViaje; //Obejo Clase ResponsableViaje
+    private $objPasajero; //Arreglo de Objeto Clase Pasajero
 
     //Constructor
-    public function __construct($unCodigo,$unaCantidadMaxima,$unDestino){
+    public function __construct($unCodigo,$unaCantidadMaxima,$unDestino,$unResponsable){
         $this->codigo=$unCodigo;
         $this->cantidadMaximaPasajeros=$unaCantidadMaxima;
         $this->destino=$unDestino;
+        $this->objResponsableViaje=$unResponsable;
         $this->objPasajero=array();
     }
 
@@ -52,6 +54,14 @@ class Viaje{
         return $this->objPasajero;
     }
 
+    /**
+     * Retorna el valor del atributo objResponsableViaje de la instancia
+     * @return ResponsableViaje
+     */
+    public function getResponsableViaje(){
+        return $this->objResponsableViaje;
+    }
+
     //Modificadores
 
     /**
@@ -80,11 +90,20 @@ class Viaje{
 
     /**
      * Modifica el valor del atributo objPasajero de la instancia por el valor pasado por parametro
-     * @param int $unArreglo
+     * @param array $unArreglo
      */
     public function setPasajeros($unArreglo){
         $this->objPasajero=$unArreglo;
     }
+
+    /**
+     * Modifica el valor del atributo objResponsable de la instancia por el valor pasado por parametro
+     * @param ResponsableViaje $unResponsable
+     */
+    public function setResponsableViaje($unResponsable){
+        $this->objResponsableViaje=$unResponsable;
+    }
+
 
     //Propios
 
@@ -141,4 +160,5 @@ class Viaje{
         }
         return $agregado;
     }
+
 }
