@@ -6,12 +6,14 @@ Class Pasajero{
     private $nombre; //String
     private $apellido; //String
     private $numeroDocumento; //Int
+    private $telefono; //Int
 
     //Constructor
-    public function __construct($unNombre, $unApellido, $unNumeroDocumento){
+    public function __construct($unNombre, $unApellido, $unNumeroDocumento, $unTelefono){
         $this->nombre=$unNombre;
         $this->apellido=$unApellido;
         $this->numeroDocumento=$unNumeroDocumento;
+        $this->telefono=$unTelefono;
     }
 
     //Observadores
@@ -40,6 +42,14 @@ Class Pasajero{
         return $this->numeroDocumento;
     }
 
+    /**
+     * Retorna el valor del atributo telefono de la instancia
+     * @return int
+     */
+    public function getTelefono(){
+        return $this->telefono;
+    }
+
     //Modificadores
 
     /**
@@ -66,5 +76,12 @@ Class Pasajero{
         $this->nombre=$unNumeroDocumento;
     }
 
-    //Propios
+    /**
+     * Modifica el valor del atributo telefono de la instancia
+     * @param int $unTelefono
+     */
+    public function setTelefono($unTelefono){
+        $this->telefono=$unTelefono;
+    }
+
 }
