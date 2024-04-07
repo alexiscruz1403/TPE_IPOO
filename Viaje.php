@@ -89,7 +89,7 @@ class Viaje{
     //Propios
 
     /**
-     * Retorna la cantidad de pasajeros en el arreglo de Pasajero
+     * Retorna la cantidad de pasajeros en el arreglo de Pasajero en el atributo objPasajero
      * @return int
      */
     public function cantidadPasajeros(){
@@ -97,7 +97,7 @@ class Viaje{
     }
 
     /**
-     * Retorna el pasajero en la posicion indicada por parametro dentro del arreglo de Pasajero
+     * Retorna el pasajero en la posicion indicada por parametro dentro del arreglo de Pasajero en el atributo objPasajero
      * @param int $posicion
      * @return Pasajero
      */
@@ -106,7 +106,7 @@ class Viaje{
     }
 
     /**
-     * Verifica si el pasajero ingresado por parametro se encuentra en el arreglo de Pasajero
+     * Verifica si el pasajero ingresado por parametro se encuentra en el arreglo de Pasajero en el atributo objPasajero
      * Compara los numeros de documento para determinar si son iguales o no
      * @param Pasajero $unPasajero
      * @return boolean
@@ -123,5 +123,22 @@ class Viaje{
             }
         }
         return $encontrado;
+    }
+
+    /**
+     * Añade un pasajero al arreglo de Pasajero en el atributo objPasajero
+     * Antes de añadirlo verifica si se encuentra o no cargado en el arreglo
+     * Devuelve true si finalmente pudo ser cargado o false si no se pudo agregar
+     * @param Pasajero $unPersonaje
+     * @return boolean
+     */
+    public function agregarPasajero($unPasajero){
+        $agregado=false;
+        $encontrado=$this->estaEnLista($unPasajero);
+        if(!$encontrado){
+            $this->getPasajeros()[$this->cantidadPasajeros()]=$unPasajero;
+            $agregado=true;
+        }
+        return $agregado;
     }
 }
