@@ -76,7 +76,7 @@ class ResponsableViaje{
      * @param string $unApellido
      */
     public function setApellido($unApellido){
-        $this->nombre=$unApellido;
+        $this->apellido=$unApellido;
     }
 
     /**
@@ -84,7 +84,7 @@ class ResponsableViaje{
      * @param string $unNumeroLicencia
      */
     public function setNumeroLicencia($unNumeroLicencia){
-        $this->nombre=$unNumeroLicencia;
+        $this->numeroLicencia=$unNumeroLicencia;
     }
 
     /**
@@ -92,7 +92,7 @@ class ResponsableViaje{
      * @param string $unNumeroEmpleado
      */
     public function setNumeroEmpleado($unNumeroEmpleado){
-        $this->nombre=$unNumeroEmpleado;
+        $this->numeroEmpleado=$unNumeroEmpleado;
     }
 
 }

@@ -127,21 +127,24 @@ class Viaje{
     /**
      * Verifica si el pasajero ingresado por parametro se encuentra en el arreglo de Pasajero en el atributo objPasajero
      * Compara los numeros de documento para determinar si son iguales o no
-     * @param Pasajero $unPasajero
-     * @return boolean
+     * Devuelve la posicion dentro del arreglo si se encuentra dentro o -1 si no esta cargado en el arreglo
+     * @param int $numeroDocumento
+     * @return int
      */
-    public function estaEnLista($unPasajero){
+    public function darPosicionPasajero($numeroDocumento){
         $encontrado=false;
+        $posicion=-1;
         if($this->cantidadPasajeros()!=0){
             $i=0;
             while($i<$this->cantidadPasajeros() && !$encontrado){
-                if($unPasajero->getNumeroDocumento()==$this->darPasajeroEn($i)->getNumeroDocumento()){
+                if($numeroDocumento==$this->darPasajeroEn($i)->getNumeroDocumento()){
                     $encontrado=true;
+                    $posicion=$i;
                 }
                 $i++;
             }
         }
-        return $encontrado;
+        return $posicion;
     }
 
     /**
@@ -153,12 +156,31 @@ class Viaje{
      */
     public function agregarPasajero($unPasajero){
         $agregado=false;
-        $encontrado=$this->estaEnLista($unPasajero);
-        if(!$encontrado){
+        if($this->darPosicionPasajero($unPasajero->getNumeroDocumento)==-1){
             $this->getPasajeros()[$this->cantidadPasajeros()]=$unPasajero;
             $agregado=true;
         }
         return $agregado;
+    }
+
+    /**
+     * Elimina el pasajero en la posicion indicada por parametro
+     * Antes de eliminarlo verifica si se encuentra o no cargado en el arreglo
+     * Devuelve true si finalmente pudo ser cargado o false si no se pudo agregar
+     * @param int $numeroDocumento
+     * @return boolean
+     */
+    public function elimiarPasajero($numeroDocumento){
+        $eliminado=false;
+        $posicion=$this->darPosicionPasajero($numeroDocumento);
+        if($posicion!=-1){
+            for($i=$posicion;$i<$this->cantidadPasajeros()-1;$i++){
+                $this->getPasajeros()[$i]=$this->getPasajeros()[$i+1];
+            }
+            array_pop($this->getPasajeros());
+            $eliminado=true;
+        }
+        return $eliminado;
     }
 
 }

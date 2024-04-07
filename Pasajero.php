@@ -76,7 +76,7 @@ Class Pasajero{
      * @param string $unApellido
      */
     public function setApellido($unApellido){
-        $this->nombre=$unApellido;
+        $this->apellido=$unApellido;
     }
 
     /**
@@ -84,7 +84,7 @@ Class Pasajero{
      * @param int $unNumeroDocumento
      */
     public function setNumeroDocumento($unNumeroDocumento){
-        $this->nombre=$unNumeroDocumento;
+        $this->numeroDocumento=$unNumeroDocumento;
     }
 
     /**
